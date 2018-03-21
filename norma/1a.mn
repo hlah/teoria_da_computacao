@@ -1,8 +1,8 @@
-// QUEST√O 1.A.
-//f(x) retorna o n˙mero mÌnimo de dÌgitos decimais necess·rios para escrever x
+// QUEST√ÉO 1.A.
+//f(x) retorna o n√∫mero m√≠nimo de d√≠gitos decimais necess√°rios para escrever x
 // na base 10. Por exemplo, f(0) = 1, f(3) = 1, f(75) = 2 e f(1034) = 4
 
-// A:=A div 2 usando C (divis„o inteira por 2)
+// A:=A div 2 usando C (divis√£o inteira por 2)
 operation div2(A,C){
   1: do load(C,A) goto 2
   2: if zero C then goto 0 else goto 3
@@ -13,7 +13,7 @@ operation div2(A,C){
 }
 
 
-// A:=A div 3 usando C (divis„o inteira por 3)
+// A:=A div 3 usando C (divis√£o inteira por 3)
 operation div3(A,C){
   1: do load(C,A) goto 2
   2: if zero C then goto 0 else goto 3
@@ -25,7 +25,7 @@ operation div3(A,C){
   8: do inc A goto 2
 }
 
-// limpa vari·vel
+// limpa vari√°vel
 operation clear(A){
  1: if zero A then goto 0 else goto 2
  2: do dec A goto 1
@@ -38,7 +38,7 @@ operation soma(A,B){
   3: do inc A goto 1
 }
 
-// A:=A+B (soma n„o-destrutiva)
+// A:=A+B (soma n√£o-destrutiva)
 operation soma(A,B,C){
   1: if zero B then goto 5 else goto 2
   2: do dec B goto 3
@@ -49,14 +49,14 @@ operation soma(A,B,C){
   7: do inc B goto 5
 }
 
-// A:=B (atribuiÁ„o destrutiva)
+// A:=B (atribui√ß√£o destrutiva)
 operation load(A,B){
   1: do clear(A) goto 2
   2: do soma(A,B) goto 0
 }
 
 
-// A:=A div 10 usando C (divis„o inteira por 10)
+// A:=A div 10 usando C (divis√£o inteira por 10)
 operation div10(A,C){
   1:  do load(C,A) goto 2
   2:  if zero C then goto 0 else goto 3
