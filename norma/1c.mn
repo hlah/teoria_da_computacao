@@ -60,18 +60,19 @@ operation div(A,B,C,D,E,F) {
 }
 
 //A:= numero de 1's de A, usando B,C,D,E,F
-operation ones_of_base2(A,B,C,D,E,F){
-1: do move(B, A) goto 2
+operation ones_of_base2(A, Numero, Resto ,D,E,F){
+1: do move(Numero, A) goto 2
 2: do add DOIS 2 goto 3
-3: do div(B, DOIS, C, D, E, F ) goto 4
-4: if zero C then goto 6 else goto 5
+3: do div(Numero, DOIS, Resto, D, E, F ) goto 4
+4: if zero Resto then goto 6 else goto 5
 5: do inc A goto 6
-6: if zero B then goto 0 else goto 3
+6: if zero Numero then goto 0 else goto 3
+
 }
 
 
 main {
- 1: do move(numero, X) goto 2
- 2: do ones_of_base2(numero,T1,T2,T3,T4,T5) goto 3
- 3: do move(Y, numero) goto 0
+ 1: do move(Numero, X) goto 2
+ 2: do ones_of_base2(Numero,T1,T2,T3,T4,T5) goto 3
+ 3: do move(Y, Numero) goto 0
 }
