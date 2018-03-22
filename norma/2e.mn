@@ -195,7 +195,7 @@ operation num_digitos(A,B,C){
 }
 
 //A:= 10^A  usando B,C,D
-operation Dez_na_N(A,B,C,D){
+operation dez_na_N(A,B,C,D){
  1: do move(B,A) goto 2
  2: do inc A goto 3
  3: do add DEZ 10 goto 4
@@ -209,8 +209,10 @@ main{
  1: do extract(A,B,X,D,E) goto 2
  2: do copy(N,A,C) goto 3
  3: do num_digitos(N,D,E) goto 4
- 4: do Dez_na_N(N,C,D,E) goto 5
+ 4: do dez_na_N(N,C,D,E) goto 5
  5: do mul(B,N,C,D) goto 6
- 6: do move(Y,B,C) goto 7
+ 6: do move(Y,B) goto 7
  7: do sum(Y,A,C) goto 0 
 }
+
+
