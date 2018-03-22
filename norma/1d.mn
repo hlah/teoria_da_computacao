@@ -1,0 +1,86 @@
+//d) f(x) retorna o termo de ordem x da sequência de Fibonacci. Para todo natural x,                   
+//    definimos o termo de ordem x da sequência de Fibonacci, e o denotamos por ... 
+//    2. Sendo assim, temos que f(0) = 0, f(1) = 1, f(2) = 1, f(3) = 2, f(4) = 3 e f(5) = 5.
+
+//int fibonacci(int n)
+//{
+//	int T1=0;
+//	int T2=1;
+//	int resp=0
+//	int i;
+//
+//	if (n==0){
+//		return 0;
+//	}else{
+//		resp= T2;
+//		for(i=n-1;i>0;i--){
+//			resp= T1+T2;
+//			T1=T2;
+//			T2=resp;
+//		}
+//	}
+//	return resp;
+//}
+
+
+
+
+// limpa registrador A
+operation clear(A){
+1: if zero A then goto 0 else goto 2
+2: do dec A goto 1
+}
+
+// move B para A, zerando B
+operation move(A,B) {
+1: do clear(A) goto 2
+2: if zero B then goto 0 else goto 3
+3: do inc A goto 4
+4: do dec B goto 2
+}
+
+// copia B para A, usando C
+operation copy(A,B,C) {
+1: do clear(C) goto 2
+2: do clear(A) goto 3
+3: if zero B then goto 7 else goto 4
+4: do inc A goto 5
+5: do inc C goto 6
+6: do dec B goto 3
+7: do move(B,C) goto 0
+}
+
+// soma A = A + B, usando C
+operation sum(A,B,C) {
+1: do clear(C) goto 2
+2: if zero B then goto 6 else goto 3
+3: do dec B goto 4
+4: do inc A goto 5
+5: do inc C goto 2
+6: do move(B,C) goto 0
+}
+
+
+// A= fibonacci(B), onde A é o resultado do B-ésimo termo da sequencia de fibonacci, usando T1
+operation fibonacci(A,B, C, Count, T1, T2)
+{
+1: do clear(A) goto 2
+2: if zero B then goto 0 else goto 3
+3: do copy(Count, B, T1) goto 4
+4: do inc A goto 5
+5: do dec Count goto 6
+6: do clear (T1) goto 7
+7: do clear (T2) goto 8
+8: do inc T2 goto 9
+9: if zero Count then goto 0 else goto 10
+10: do copy (A, T1, C) goto 11
+11: do sum(A,T2,C) goto 12
+12: do copy(T1,T2,C) goto 13
+13: do copy(T2,A,C) goto 14
+14: do dec Count goto 9
+
+}
+
+main{
+1: do fibonacci(Y, X, C,D,E,F ) goto 0
+}
