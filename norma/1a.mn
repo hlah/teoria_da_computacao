@@ -82,6 +82,7 @@ operation div10(A,C){
   22: do inc A goto 2
 }
 
+//A:= num_digitos(A), usando B e C
 operation num_digitos(A,B,C){
   1: do load(B,A) goto 2
   2: do div10(B,C) goto 3
