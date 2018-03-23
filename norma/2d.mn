@@ -1,0 +1,212 @@
+// Questão 2.d
+
+///// MACROS
+
+// limpa registrador A
+operation clear(A){
+1: if zero A then goto 0 else goto 2
+2: do dec A goto 1
+}
+
+// move B para A, zerando B
+operation move(A,B) {
+1: do clear(A) goto 2
+2: if zero B then goto 0 else goto 3
+3: do inc A goto 4
+4: do dec B goto 2
+}
+
+// copia B para A, usando C
+operation copy(A,B,C) {
+1: do clear(C) goto 2
+2: do clear(A) goto 3
+3: if zero B then goto 7 else goto 4
+4: do inc A goto 5
+5: do inc C goto 6
+6: do dec B goto 3
+7: do move(B,C) goto 0
+}
+
+// soma A = A + B, usando C
+operation sum(A,B,C) {
+1: do clear(C) goto 2
+2: if zero B then goto 6 else goto 3
+3: do dec B goto 4
+4: do inc A goto 5
+5: do inc C goto 2
+6: do move(B,C) goto 0
+}
+
+// subtração A = A - B, usando C
+operation sub(A,B,C) {
+1: do clear (C) goto 2
+2: if zero B then goto 6 else goto 3
+3: do dec B goto 4
+4: do dec A goto 5
+5: do inc C goto 2
+6: do move(B,C) goto 0
+}
+
+// multiplicação A = A * B, usando C e D
+operation mul(A,B,C,D) {
+1: do move(C,A) goto 2
+2: if zero C then goto 0 else goto 3
+3: do dec C goto 4
+4: do sum(A,B,D) goto 2
+}
+
+// comparaçao A < B, usando C e D
+test lt(A,B,C,D,E) {
+a: do clear(E) goto 1
+1: do copy(C,A,E) goto 2
+2: do copy(D,B,E) goto 3
+3: if zero D then goto false else goto 4
+4: if zero C then goto true else goto 5
+5: do dec D goto 6
+6: do dec C goto 3
+}
+
+// divisão A = A/B, resto em C, usando D, E, e F
+operation div(A,B,C,D,E,F) {
+1: do move(C,A) goto 2
+2: if lt(C,B,D,E,F) then goto 0 else goto 3
+3: do sub(C,B,D) goto 4
+4: do inc A goto 2
+}
+
+
+//
+
+// A:=A div 2 usando C (divisão inteira por 2)
+operation div2(A,C){
+  1: do move(C,A) goto 2
+  2: if zero C then goto 0 else goto 3
+  3: do dec C goto 4
+  4: if zero C then goto 0 else goto 5
+  5: do dec C goto 6
+  6: do inc A goto 2
+}
+
+// A divisivel_por_2 usando C (teste se multiplo de 2)
+test divBy2(A,C){
+  1: do move(C,A) goto 2
+  2: if zero C then goto true else goto 3
+  3: do dec C goto 4
+  4: do inc A goto 5
+  5: if zero C then goto false else goto 6
+  6: do inc A goto 7
+  7: do dec C goto 2
+}
+
+// A:=fst(B) usando C,D (extrai o primeiro componente do par)
+operation fst(A,B,C,D){
+  1: do clear(A) goto 2
+  2: do copy(C,B,D) goto 3
+  3: if divBy2(C,D) then goto 4 else goto 6
+  4: do div2(C,D) goto 5
+  5: do inc A goto 3
+  6: do clear(C) goto 0
+}
+
+
+
+//A:=A/3 usando C (divisão inteira por 3)
+operation div3(A,C){
+ 1: do move(C,A) goto 2
+ 2: if zero C then goto 0 else goto 3
+ 3: do dec C goto 4
+ 4: if zero C then goto 0 else goto 5
+ 5: do dec C goto 6
+ 6: if zero C then goto 0 else goto 7
+ 7: do dec C goto 8
+ 8: do inc A goto 2
+}
+
+
+//A divisivel_por_3 usando C (teste se multiplo de 3)
+test divBy3(A,C){
+ 1: do move(C,A) goto 2
+ 2: if zero C then goto true else goto 3
+ 3: do dec C goto 4
+ 4: do inc A goto 5
+ 5: if zero C then goto false else goto 6
+ 6: do inc A goto 7
+ 7: do dec C goto 8
+ 8: if zero C then goto false else goto 9
+ 9: do dec C goto 10
+10: do inc A goto 2
+}
+
+//A:=snd(B) usando C,D (extrai o segundo componente do par)
+operation snd(A,B,C,D){
+ 1: do clear(A) goto 2
+ 2: do copy(C,B,D) goto 3
+ 3: if divBy3(C,D) then goto 4 else goto 6
+ 4: do div3(C,D) goto 5
+ 5: do inc A goto 3
+ 6: do clear(C) goto 0
+}
+
+//(A,B):= C usando D E F (extrai as componentes do par (A,B) a partir do numero C usando E, F
+operation extract(A,B,C,D,E){
+ // extrai o primeiro componente do par
+ 1: do fst(A,C,D,E) goto 2  
+  // extrai o segundo  componente do par
+ 2: do snd(B,C,D,E) goto 0  
+
+}
+
+// A:=A div 10 usando C (divisão inteira por 10)
+operation div10(A,C){
+  1:  do move(C,A) goto 2
+  2:  if zero C then goto 0 else goto 3
+  3:  do dec C goto 4
+  4:  if zero C then goto 0 else goto 5
+  5:  do dec C goto 6
+  6:  if zero C then goto 0 else goto 7
+  7:  do dec C goto 8
+  8:  if zero C then goto 0 else goto 9
+  9:  do dec C goto 10
+  10: if zero C then goto 0 else goto 11
+  11: do dec C goto 12
+  12: if zero C then goto 0 else goto 13
+  13: do dec C goto 14
+  14: if zero C then goto 0 else goto 15
+  15: do dec C goto 16
+  16: if zero C then goto 0 else goto 17
+  17: do dec C goto 18
+  18: if zero C then goto 0 else goto 19
+  19: do dec C goto 20
+  20: if zero C then goto 0 else goto 21
+  21: do dec C goto 22
+  22: do inc A goto 2
+}
+
+//A:= num_digitos(A), usando B e C
+operation num_digitos(A,B,C){
+  1: do move(B,A) goto 2
+  2: do div10(B,C) goto 3
+  3: do inc A goto 4
+  4: if zero B then goto 0 else goto 2
+}
+
+
+//// SOLUÇÂO
+main {
+1: do extract(A,B,X,T1,T2) goto 2
+2: do copy(C,B,T1) goto 3
+3: do inc Y goto 4                        
+4: if zero C then goto 8 else goto 5
+5: do mul(Y,A,T1,T2) goto 6
+6: do dec A goto 7
+7: do dec C goto 4
+8: do inc D goto 9
+9: if zero B then goto 12 else goto 10
+10: do mul(D,B,T1,T2) goto 11
+11: do dec B goto 9
+12: do div(Y,D,R,T1,T2,T3) goto 0
+}
+
+
+
+
