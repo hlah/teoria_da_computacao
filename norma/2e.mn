@@ -1,7 +1,6 @@
-
-//2b) f(x, y) retorna o quociente da divisão inteira de x por y se y > 0. 
-//    Se y = 0, f(x, y) retorna 0.     
-//    Por exemplo, f(5, 3) = 1, f(139, 24) = 5 e f(88, 0) = 0.
+//2e) f(x, y) retorna y concatenado a x, isto é, o número que resulta da concatenação,
+//    nessa ordem, dos dígitos de y com os dígitos de x (ignorando zeros a esquerda). 
+//    Por exemplo, f(12,38) = 3812, f(1, 50) = 501 e f(374, 0) = 374.
 
 // limpa registrador A
 operation clear(A){
