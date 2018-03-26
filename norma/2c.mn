@@ -1,6 +1,6 @@
-//2b) f(x, y) retorna o quociente da divisão inteira de x por y se y > 0. 
+//2c) f(x, y) retorna o resto da divisão inteira de x por y se y > 0. 
 //    Se y = 0, f(x, y) retorna 0.     
-//    Por exemplo, f(5, 3) = 1, f(139, 24) = 5 e f(88, 0) = 0.
+//    Por exemplo, f(4, 2) = 0, f(6, 17) = 6, f(83526, 9982) = 3670, f(111,0)= 0.
 
 // limpa registrador A
 operation clear(A){
