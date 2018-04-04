@@ -1,0 +1,10 @@
+let
+true          = (\a.\b. a);
+false         = (\a.\b. b);
+if            = (\c.\a.\b. c a b);
+sucessor      = (\n.\f.\x.f (n f x));
+soma          = \a.\b.\x.\y.(a x)((b x) y);
+multiplica    = \a.\b.\x. a (b x);
+
+in
+soma 100 100
