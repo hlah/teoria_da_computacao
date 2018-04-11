@@ -1,0 +1,47 @@
+
+let
+-------------- Definições ----------------
+-- Combinador Y --
+Y = \f.(\x.f (x x))(\x.f(x x));
+
+-- operações lógicas --
+true          = (\a.\b. a);
+false         = (\a.\b. b);
+if            = (\c.\a.\b. c a b);
+not      = (\a.a false true);
+and      = (\a.\b. a b false);
+or       = (\a.\b. a true b);
+
+-- tuplas e listas --
+pair       = (\a.\b.\s.s a b);
+first      = (\l. l true);
+second     = (\l. l false);
+empty      = (\a.true);
+cons       = pair;
+head       = first;
+tail       = second;
+is_empty   = (\l.l(\x.\y.false));
+
+-- testes e operações aritiméticas --
+inc    = (\n.\f.\x.f (n f x));
+add    = \a.\b.\x.\y.(a x)((b x) y);
+mul    = \a.\b.\x. a (b x);
+is_zero   = (\a.a (\x.false) true); 
+shift_inc = (\p.(pair (second p) (inc (second p))));
+dec    = (\a.(first (a shift_inc (pair 0 0))));
+
+
+-------------- soluções --------------
+-- problema 1.a --
+f1 = (\x.\y.(add (add x x) y));
+-- problema 1.b --
+f2 = (\p.(pair (second p) (first p)));
+-- problema 1.c --
+f3 = Y (\I.\l. if (is_empty l) 
+                  0 
+                  (add (head l) (I (tail l))));
+
+--------------------------------------
+
+in
+f3 (cons 10 (cons 1 (cons 7 (cons 9 empty))))
