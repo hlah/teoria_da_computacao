@@ -47,6 +47,10 @@ inv= Y \M.\l1 l2. if (is_empty l1)
                          (M (tail l1) (cons (head l1) l2));
 f4= \l.inv l empty;
 
+f5= Y \M.\l1 l2. if (or (is_empty l1) (is_empty l2))
+                (pair empty empty)
+                (cons (pair (head l1) (head l2)) (M (tail l1) (tail l2))) 
+
 
 in
-f4 (cons 1 (cons 3 (cons 5 (cons 7 empty))))
+f5 (cons 2 (cons 4 (cons 6 (cons 8 empty)))) (cons 1 (cons 3 (cons 5 empty)))
