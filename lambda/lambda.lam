@@ -41,7 +41,12 @@ f3 = Y (\I.\l. if (is_empty l)
                   0 
                   (add (head l) (I (tail l))));
 
---------------------------------------
+
+inv= Y \M.\l1 l2. if (is_empty l1)  
+                         l2
+                         (M (tail l1) (cons (head l1) l2));
+f4= \l.inv l empty;
+
 
 in
-f3 (cons 10 (cons 1 (cons 7 (cons 9 empty))))
+f4 (cons 1 (cons 3 (cons 5 (cons 7 empty))))
