@@ -1,4 +1,3 @@
-
 let
 -------------- Definições ----------------
 -- Combinador Y --
@@ -23,6 +22,7 @@ tail       = second;
 is_empty   = (\l.l(\x.\y.false));
 
 -- testes e operações aritiméticas --
+zero = false;
 inc    = (\n.\f.\x.f (n f x));
 add    = \a.\b.\x.\y.(a x)((b x) y);
 mul    = \a.\b.\x. a (b x);
@@ -32,7 +32,7 @@ dec    = (\a.(first (a shift_inc (pair 0 0))));
 
 sub      = \m n. (n dec) m ;
 less     = \m n. not (is_zero (sub n m)) ;
---div      = Y (\M. \m n. if (less m n) zero (succ (M (sub m n) n))) ;
+div      = Y (\M. \m n. if (less m n) zero (inc (M (sub m n) n))) ;
 mod      = Y (\M. \m n. if (less m n) m (M (sub m n) n)) ;
 
 --Codificacao Padrao
@@ -40,6 +40,8 @@ ZeroCP= \x.x;
 succCP= \n.(pair false n);
 isZeroCP= \n. (first n) ;
 predCP= \n. (second n);
+
+churchToCP= Y \M.\x. if (is_zero x) (\x.x) (pair false (M (dec x)));
 
 
 repeatCP = Y \M.\n f x. if (isZeroCP n) x
@@ -49,6 +51,19 @@ evenCP = \x. if (is_zero(mod (repeatCP x) 2)) true false;
 
 addCP = Y \M.\x y. if (isZeroCP x) y
 							  (pair false (M (predCP x) y));
+
+--(addCP y y)
+
+--multCP= \x y. if (isZeroCP x) y
+--                              (add )
+
+multCP= \x y.(churchToCP (mul (repeatCP x) (repeatCP y)));
+   
+halfCP= \x. (churchToCP (div (repeatCP x) 2));      
+
+
+
+
 -------------- soluções --------------
 -- problema 1.a --
 f1 = (\x.\y.(add (add x x) y));
@@ -71,5 +86,4 @@ f5= Y \M.\l1 l2. if (or (is_empty l1) (is_empty l2))
 
 
 in
-(addCP (pair false (pair false (pair false \x.x)))
-                   (pair false (pair false \x.x)) )
+halfCP (pair false (pair false \x.x))
