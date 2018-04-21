@@ -30,6 +30,11 @@ is_zero   = (\a.a (\x.false) true);
 shift_inc = (\p.(pair (second p) (inc (second p))));
 dec    = (\a.(first (a shift_inc (pair 0 0))));
 
+sub      = \m n. (n dec) m ;
+less     = \m n. not (is_zero (sub n m)) ;
+--div      = Y (\M. \m n. if (less m n) zero (succ (M (sub m n) n))) ;
+mod      = Y (\M. \m n. if (less m n) m (M (sub m n) n)) ;
+
 --Codificacao Padrao
 ZeroCP= \x.x;
 succCP= \n.(pair false n);
@@ -39,6 +44,8 @@ predCP= \n. (second n);
 
 repeatCP = Y \M.\n f x. if (isZeroCP n) x
                                    (f (M (predCP n) f x));
+
+evenCP = \x. if (is_zero(mod (repeatCP x) 2)) true false;
 
 -------------- soluções --------------
 -- problema 1.a --
@@ -62,4 +69,4 @@ f5= Y \M.\l1 l2. if (or (is_empty l1) (is_empty l2))
 
 
 in
-repeatCP (pair false (pair false (pair false (\x.x))))
+evenCP (pair false (pair false (pair false (\x.x))))
