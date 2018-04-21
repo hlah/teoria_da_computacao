@@ -47,6 +47,8 @@ repeatCP = Y \M.\n f x. if (isZeroCP n) x
 
 evenCP = \x. if (is_zero(mod (repeatCP x) 2)) true false;
 
+addCP = Y \M.\x y. if (isZeroCP x) y
+							  (pair false (M (predCP x) y));
 -------------- soluções --------------
 -- problema 1.a --
 f1 = (\x.\y.(add (add x x) y));
@@ -69,4 +71,5 @@ f5= Y \M.\l1 l2. if (or (is_empty l1) (is_empty l2))
 
 
 in
-evenCP (pair false (pair false (pair false (\x.x))))
+(addCP (pair false (pair false (pair false \x.x)))
+                   (pair false (pair false \x.x)) )
