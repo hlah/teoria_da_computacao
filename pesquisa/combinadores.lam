@@ -1,0 +1,22 @@
+let
+I = \x.x;
+K = \x y.x;
+S = \x y z.x z(y z);
+
+true = K;
+false = K I; 
+if = I;
+not = S (S I(K(K I)))(K K);
+
+zero = K I;
+um = S(S(K S)K)(K I);
+dois = S(S(K S)K)I;
+tres = S(S(K S)K)(S(S(K S)K)I);
+quatro = S(S(K S)K)(S(S(K S)K)(S(S(K S)K)I));
+
+inc = S(S(K S)K);
+
+in
+inc tres
+
+
